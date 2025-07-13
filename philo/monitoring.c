@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:34 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/13 13:32:32 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/13 14:21:13 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	monitoring(t_data *data, int counter, int i)
 {
 	while (i < data->number_of_philosophers)
 	{
-		if (i == 0)
-			usleep(1000);
 		pthread_mutex_lock(&data->philosophers[i].mutex_of_time);
 		if (data->time_to_die < (get_tm()
 				- data->philosophers[i].last_time_to_eat))
@@ -52,5 +50,7 @@ void	monitoring(t_data *data, int counter, int i)
 		i = (i % data->number_of_philosophers);
 		if (i == 0)
 			counter = 0;
+		if (i == 0)
+			usleep(1000);
 	}
 }

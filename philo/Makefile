@@ -1,15 +1,21 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 NAME = philo
-SRCS = 
+SRCS = ft_atoi.c monitoring.c philo.c routine.c parsing_threads.c utils.c
 OBJS = $(SRCS:.c=.o)
-all: $(NAME) clean
+
+all: $(NAME)
 
 $(NAME): $(OBJS)
-	@cc -o $(NAME) $^
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
-	@rm -rf $(OBJS)
+	rm -rf $(OBJS)
+
 fclean: clean
-	@rm -rf $(NAME)
+	rm -rf $(NAME)
+
 re: fclean all
+
+.PHONY: all clean fclean re
+

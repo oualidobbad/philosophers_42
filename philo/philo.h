@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:37:15 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/13 13:29:42 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/13 14:20:52 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-# define RED_BLINK "\e[1;5;31m"
-# define MAGENTA "\x1b[35m"
-# define YELLOW "\x1b[33m"
-# define RESET "\x1b[0m"
-# define GREEN "\x1b[32m"
-# define WHITE "\x1b[37m"
-# define PINK "\x1b[38;5;213m"
-# define BLUE "\x1b[34m"
-# define CYAN "\x1b[36m"
-# define OFF "\e[m"
-# define RED "\x1b[31m"
 
 # define TAKE_FORK "has taken a fork\n"
 # define IS_THINKING "is thinking\n"
