@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:39 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/13 13:28:29 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/16 11:36:58 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,24 @@ bool	allocate_forks_threads(t_data *data)
 	return (true);
 }
 
-void	ft_usleep(t_philo *philo, int time)
+void	ft_usleep(t_philo *philo, int ms_time)
 {
-	if (philo->data->time_to_die < time)
-		usleep(philo->data->time_to_die * 1000);
-	else
-		usleep(time * 1000);
+	unsigned long	start;
+	unsigned long	us_time;
+
+	start = get_tm() * 1000;
+	us_time = (unsigned long)ms_time * 1000;
+	while (((get_tm() * 1000) - start) < us_time)
+	{
+		pthread_mutex_lock(&philo->data->mutex_end_simulation);
+		if (philo->data->end_simulation)
+		{
+			pthread_mutex_unlock(&philo->data->mutex_end_simulation);
+			return ;
+		}
+		pthread_mutex_unlock(&philo->data->mutex_end_simulation);
+		usleep(50);
+	}
 }
 
 long	get_tm(void)

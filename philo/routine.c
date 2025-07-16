@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:44 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/13 13:28:23 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/16 12:53:34 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,19 @@ void	thinking(t_philo *philo)
 	if (philo->id % 2 && philo->data->number_of_philosophers % 2)
 	{
 		if (philo->data->time_to_eat > philo->data->time_to_sleep)
-			ft_usleep(philo, (philo->data->time_to_eat
-					- philo->data->time_to_sleep));
-		usleep(2000);
+			ft_usleep(philo, philo->data->time_to_eat
+				- philo->data->time_to_sleep);
+		else if (philo->data->time_to_eat < philo->data->time_to_sleep)
+			ft_usleep(philo, philo->data->time_to_sleep
+				- philo->data->time_to_eat);
+		ft_usleep(philo, 2);
 	}
 }
 
 void	start_routine(t_philo *philo)
 {
 	if (philo->id % 2)
-		usleep(1000);
+		ft_usleep(philo, 2);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->mutex_end_simulation);

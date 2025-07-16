@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:56 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/13 09:07:58 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/16 12:51:09 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,15 @@ int	main(int ac, char **av)
 {
 	t_data	*data;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (write(2, "malloc fail\n", 13), 1);
 	if (ac < 5 || ac > 6)
-	{
-		write(2, "check Argument\n", 16);
-		return (1);
-	}
+		return (write(2, "check Argument\n", 16), 1);
+	data = malloc(sizeof(t_data));
 	if (parse_data(data, av) == 1)
-		return (1);
-	data->start_simulation = get_tm();
+	{
+		if (!data->number_of_eats && data->flag)
+			return (free(data), 0);
+		return (free(data), 1);
+	}
 	if (creat_phiolosophers(data))
 		return (1);
 	all_free_and_destroy(data);

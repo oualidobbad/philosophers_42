@@ -6,13 +6,13 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:29 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/13 14:00:31 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/16 12:55:50 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	init_data_of_philo(t_data *data)
+void	init_data_of_philo(t_data *data)
 {
 	int	i;
 
@@ -37,7 +37,22 @@ bool	init_data_of_philo(t_data *data)
 		data->philosophers[i].counter = 0;
 		i++;
 	}
-	return (true);
+}
+
+int	parse_data_helper(t_data *data, char **av)
+{
+	if (av[5])
+	{
+		data->number_of_eats = ft_atoi(av[5], &data->flag);
+		if (data->flag == 0)
+			return (write(2, "Error\n invalid nb eats\n", 24), 1);
+		if (data->number_of_eats == 0)
+			return (1);
+	}
+	if (!allocate_forks_threads(data))
+		return (write(2, "fail malloc\n", 13), 1);
+	init_data_of_philo(data);
+	return (0);
 }
 
 int	parse_data(t_data *data, char **av)
@@ -56,15 +71,8 @@ int	parse_data(t_data *data, char **av)
 	data->time_to_sleep = ft_atoi(av[4], &data->flag);
 	if (data->flag == 0)
 		return (write(2, "Error\n check time to sleep\n", 28), 1);
-	if (av[5])
-	{
-		data->number_of_eats = ft_atoi(av[5], &data->flag);
-		if (data->flag == 0)
-			return (write(2, "Error\n invalid nb eats\n", 24), 1);
-	}
-	if (!allocate_forks_threads(data))
-		return (write(2, "fail malloc\n", 13), 1);
-	init_data_of_philo(data);
+	if (parse_data_helper(data, av) == 1)
+		return (1);
 	return (0);
 }
 
@@ -73,16 +81,11 @@ bool	creat_phiolosophers(t_data *data)
 	int	i;
 
 	i = 0;
+	data->start_simulation = get_tm();
 	while (i < data->number_of_philosophers)
 	{
-		if (pthread_create(&data->philosophers[i].philo, NULL,
-				routine_of_philosophers, &data->philosophers[i]) < 0)
-		{
-			while (i > -1)
-				pthread_join(data->philosophers[i--].philo, NULL);
-			all_free_and_destroy(data);
-			return (write(2, "fail pthreads create\n", 22), true);
-		}
+		pthread_create(&data->philosophers[i].philo, NULL,
+			routine_of_philosophers, &data->philosophers[i]);
 		i++;
 	}
 	monitoring(data, 0, 0);
