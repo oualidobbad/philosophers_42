@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:37:15 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/16 11:37:20 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/17 13:27:36 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_data
 
 void				monitoring(t_data *data, int counter, int i);
 long				ft_atoi(char *nb, int *flag);
-void				precise_usleep(long usec);
 long				get_tm(void);
+void 				ft_putstr(int fd, char *str);
 void				*routine_of_philosophers(void *arg);
 void				ft_usleep(t_philo *philo, int time);
 void				all_free(t_data *data);

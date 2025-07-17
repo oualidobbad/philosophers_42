@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:56 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/16 12:51:09 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/17 13:28:44 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ int	main(int ac, char **av)
 	t_data	*data;
 
 	if (ac < 5 || ac > 6)
-		return (write(2, "check Argument\n", 16), 1);
+		return (ft_putstr(2, "check Argument\n"), 1);
 	data = malloc(sizeof(t_data));
+	if (!data)
+		return (ft_putstr(2, "malloc fail\n"), 1);
 	if (parse_data(data, av) == 1)
 	{
 		if (!data->number_of_eats && data->flag)

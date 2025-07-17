@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:39 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/16 11:36:58 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/17 13:33:40 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	allocate_forks_threads(t_data *data)
 	data->forks = malloc(sizeof(pthread_mutex_t)
 			* data->number_of_philosophers);
 	if (!data->forks)
-		return (free(data->philosophers), free(data), false);
+		return (free(data->philosophers), false);
 	return (true);
 }
 
@@ -72,4 +72,16 @@ long	get_tm(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void ft_putstr(int fd, char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(fd, str[i], 1);
+		i++;
+	}
 }

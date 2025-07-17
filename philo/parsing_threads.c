@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:29 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/16 12:55:50 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/17 13:33:05 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	parse_data_helper(t_data *data, char **av)
 	{
 		data->number_of_eats = ft_atoi(av[5], &data->flag);
 		if (data->flag == 0)
-			return (write(2, "Error\n invalid nb eats\n", 24), 1);
+			return (ft_putstr(2, "Error\n invalid nb eats\n"), 1);
 		if (data->number_of_eats == 0)
 			return (1);
 	}
 	if (!allocate_forks_threads(data))
-		return (write(2, "fail malloc\n", 13), 1);
+		return (ft_putstr(2, "fail malloc\n"), 1);
 	init_data_of_philo(data);
 	return (0);
 }
@@ -61,16 +61,16 @@ int	parse_data(t_data *data, char **av)
 	data->number_of_eats = -1;
 	data->number_of_philosophers = ft_atoi(av[1], &data->flag);
 	if (data->flag == 0)
-		return (write(2, "Error\n check number of philosophers\n", 37), 1);
+		return (ft_putstr(2, "Error\n check number of philosophers\n"), 1);
 	data->time_to_die = ft_atoi(av[2], &data->flag);
 	if (data->flag == 0)
-		return (write(2, "Error\n check time to die\n", 26), 1);
+		return (ft_putstr(2, "Error\n check time to die\n"), 1);
 	data->time_to_eat = ft_atoi(av[3], &data->flag);
 	if (data->flag == 0)
-		return (write(2, "Error\n check time to eat\n", 26), 1);
+		return (ft_putstr(2, "Error\n check time to eat\n"), 1);
 	data->time_to_sleep = ft_atoi(av[4], &data->flag);
 	if (data->flag == 0)
-		return (write(2, "Error\n check time to sleep\n", 28), 1);
+		return (ft_putstr(2, "Error\n check time to sleep\n"), 1);
 	if (parse_data_helper(data, av) == 1)
 		return (1);
 	return (0);
