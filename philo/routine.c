@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oobbad <oobbad@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:44 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/16 12:53:34 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/26 23:20:35 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void	*routine_of_philosophers(void *arg)
 	}
 	else
 		start_routine(philo);
+	// pthread_detach(philo->philo);
 	return (NULL);
 }

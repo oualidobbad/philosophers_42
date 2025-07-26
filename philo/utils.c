@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oobbad <oobbad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oobbad <oobbad@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:39 by oobbad            #+#    #+#             */
-/*   Updated: 2025/07/17 13:33:40 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/07/26 23:08:40 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void ft_putstr(int fd, char *str)
 	i = 0;
 	while (str[i])
 	{
-		write(fd, str[i], 1);
+		write(fd, &str[i], 1);
 		i++;
 	}
 }
