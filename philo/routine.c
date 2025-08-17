@@ -6,7 +6,7 @@
 /*   By: oobbad <oobbad@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 12:36:44 by oobbad            #+#    #+#             */
-/*   Updated: 2025/08/17 14:25:49 by oobbad           ###   ########.fr       */
+/*   Updated: 2025/08/17 14:26:59 by oobbad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	eating(t_philo *philo)
 {
-	if (!philo->id % 2)
+	if (philo->id % 2)
 	{
-		pthread_mutex_lock(philo->forks_left);
-		print_stat(TAKE_FORK, philo, 0);
 		pthread_mutex_lock(philo->forks_right);
+		print_stat(TAKE_FORK, philo, 0);
+		pthread_mutex_lock(philo->forks_left);
 		print_stat(TAKE_FORK, philo, 0);
 	}
 	else
 	{
-		pthread_mutex_lock(philo->forks_right);
-		print_stat(TAKE_FORK, philo, 0);
 		pthread_mutex_lock(philo->forks_left);
+		print_stat(TAKE_FORK, philo, 0);
+		pthread_mutex_lock(philo->forks_right);
 		print_stat(TAKE_FORK, philo, 0);
 	}
 	print_stat(IS_EATING, philo, 0);
