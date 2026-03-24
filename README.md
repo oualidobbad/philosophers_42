@@ -1,28 +1,24 @@
-# philosophers_42
+    # philosophers_42
 
-## Description
-Dining philosophers concurrency exercise using pthreads.
+    Dining philosophers implemented with pthreads, focusing on deadlock avoidance and starvation detection.
 
-## Features
-- Mutex-protected forks; timing/starvation checks.
-- Configurable philosopher counts and timings.
+    ## Architecture
+    - Threads: one per philosopher plus a monitor (or time checks inside loop) watching `last_meal` timestamps.
+    - Sync: one mutex per fork; optional print mutex to serialize output.
+    - Strategy: ordered fork pickup (e.g., even takes right then left, odd takes left then right) to avoid circular wait.
 
-## Technologies Used
-- C, pthreads, Makefile.
+    ## Build & Run
+    - `make` → builds `philo`.
+    - Usage: `./philo 5 800 200 200 [must_eat]` (args: count, time_to_die, time_to_eat, time_to_sleep, optional meals target).
 
-## Installation
-- Run `make` to build `philo`.
+    ## Technical Notes
+    - Timing: typically uses `gettimeofday`-based ms timestamps; avoid busy waits by short sleeps while checking elapsed time.
+    - Termination: stop when any philosopher dies or when all reach `must_eat` count.
+    - Output must remain ordered and free of interleaved lines; protect with a dedicated mutex.
 
-## Usage
-- `./philo 5 800 200 200 [must_eat]` to simulate.
+    ## Testing Ideas
+    - Minimal counts (1, 2 philosophers) to ensure edge logic works; large counts to stress timing.
+    - Use small time_to_die to force deaths and verify monitor behavior.
 
-## Example
-- `./philo 4 410 200 200` runs four philosophers.
-
-## Technical Notes
-- pthreads + mutex per fork; to avoid deadlock, odd philosophers pick right then left (or ordered pickup strategy).
-- Timing uses gettimeofday; monitor thread checks starvation by comparing last_meal vs time_to_die.
-- Respect 42 rules: no busy waits, protect shared writes (stdout) with a print mutex.
-
-## Author
-- Oualid Obbad (@oualidobbad)
+    ## Author
+    Oualid Obbad (@oualidobbad)
